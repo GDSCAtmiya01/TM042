@@ -16,6 +16,10 @@ const userTable = new mongoose.Schema(
       type: String,
       required: true,
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
     avatar: {
       type: String,
       default:
@@ -25,6 +29,6 @@ const userTable = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model("B_user", userTable);
+const User = mongoose.model("atm_user", userTable);
 
 export default User;

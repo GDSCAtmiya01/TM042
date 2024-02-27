@@ -11,9 +11,10 @@ export const verifyAdmin = (req, res, next) => {
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) return next(errorHandler(403, "Forbidden"));
 
-    req.user = user;
+    const isadmin = user.isadmin;
 
-    if (!req.user.isadmin) {
+    if (!isadmin) {
+      console.log(req.user.isadmin);
       return next(errorHandler(403, "Forbidden - not admin"));
     }
     next();

@@ -1,45 +1,18 @@
-import Event from "../models/event.model.js";
-// import atmEvent from '../models/event.model'
+import University from "../models/university.model";
 
-export const createEvent = async (req, res, next) => {
+export const createUniversity = async (req, res, next) => {
     const {
-        title,
-        description,
-        university,
-        startingDate,
-        endingDate,
-        location,
-        totalParticipants,
-        image,
-        resgestrationOpen,
-        registrationStartDate,
-        registrationEndDate,
-        allowTeams,
-        teams,
-        limitOfMembers,
-        allowSubEvents,
-        subEvents
+        universityName,
+        universityCode,
+        admins
     } = req.body;
-    const newEvent = new Event({
-        title,
-        description,
-        university,
-        startingDate,
-        endingDate,
-        location,
-        totalParticipants,
-        image,
-        resgestrationOpen,
-        registrationStartDate,
-        registrationEndDate,
-        allowTeams,
-        teams,
-        limitOfMembers,
-        allowSubEvents,
-        subEvents
+    const newUni = new University({
+        universityName,
+        universityCode,
+        admins
     });
     try {
-        await newEvent.save();
+        await newUni.save();
         res.status(200).json("created new event successfully!");
     } catch (err) {
         next(err);
@@ -59,15 +32,17 @@ export const updateEvent = async (req, res, next) => {
 
     const id = req.params.id;
     const updateOps = {};
-    const { title, description, university,startingDate, endingDate, location, totalParticipants, image, resgestrationOpen,
-        registrationStartDate, registrationEndDate, allowTeams, teams, limitOfMembers, allowSubEvents, subEvents } = req.body;
+    const { universityName,
+        universityCode,
+        admins } = req.body;
 
 
     try {
         const result = await Event.updateOne({ _id: id }, {
             $set: {
-                title, description, university, startingDate, endingDate, location, totalParticipants, image, resgestrationOpen,
-                registrationStartDate, registrationEndDate, allowTeams, teams, limitOfMembers, allowSubEvents, subEvents
+                universityName,
+                universityCode,
+                admins
             }
         });
         if (result.matchedCount === 0) {

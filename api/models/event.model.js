@@ -64,7 +64,7 @@ const eventTable = new mongoose.Schema(
 
     image: { type: String, required: true },
 
-    resgestrationOpen: { type: Boolean, required: true, default: true },
+    resgistrationOpen: { type: Boolean, required: true, default: true },
 
     registrationStartDate: { type: Date, required: true },
 
@@ -72,23 +72,25 @@ const eventTable = new mongoose.Schema(
 
     allowTeams: { type: Boolean, required: false, default: false },
 
-    teams: {
-      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team' }],
-      default: [],
-      required: false
-  }, // if allowTeams is true then this field is required
+  //   teams: {
+  //     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team' }],
+  //     default: [],
+  //     required: false
+  // },
+   // if allowTeams is true then this field is required
     // this field is ref to the team schema
 
     limitOfMembers: { type: Number, required: false, default: 1 },
 
     allowSubEvent: { type: Boolean, required: true, default: false },
 
-    subEvents: {
-      type : [{type: mongoose.Schema.Types.ObjectId, ref: 'SubEvent'}],
-      default: [],
-      required: false // if allowSubEvent is true then this field is required
+    // subEvents: {
+    //   type : [{type: mongoose.Schema.Types.ObjectId, ref: 'SubEvent'}],
+    //   default: [],
+    //   required: false 
+      // if allowSubEvent is true then this field is required
     // this field is ref to the subEvent schema
-  },
+  // },
 },
   { timestamps: true }
 );

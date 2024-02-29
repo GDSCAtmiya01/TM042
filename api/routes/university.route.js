@@ -1,12 +1,12 @@
-// import express from 'express'
-// import { createEvent, deleteEvent, getAllEvent, updateEvent } from '../controllers/event.controller.js'
+import express from 'express'
+import { createUniversity, getAllUniversity, updateUniversity, deleteUniversity } from '../controllers/university.controller.js'
 // import { verifyAdmin } from '../utils/verifyAdmin.js'
 
-// const router = express.Router()
+const router = express.Router()
 
-// router.post('/create', createEvent)
-// router.get('/get', getAllEvent)
-// router.patch('/update/:id', updateEvent)
-// router.delete('/delete/:id', deleteEvent)
+router.post('/create', createUniversity)
+router.get('/get', getAllUniversity)
+router.patch('/update/:id', updateUniversity)
+router.delete('/delete/:id', deleteUniversity)
 
-// export default router
+export default router

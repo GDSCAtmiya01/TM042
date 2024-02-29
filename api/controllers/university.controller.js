@@ -1,4 +1,4 @@
-import University from "../models/university.model";
+import University from "../models/university.model.js";
 
 export const createUniversity = async (req, res, next) => {
     const {
@@ -13,32 +13,30 @@ export const createUniversity = async (req, res, next) => {
     });
     try {
         await newUni.save();
-        res.status(200).json("created new event successfully!");
+        res.status(200).json("Added new University successfully!");
     } catch (err) {
         next(err);
     }
 };
 
-export const getAllEvent = async (req, res, next) => {
+export const getAllUniversity = async (req, res, next) => {
     try {
-        res.send([global.Events])
+        res.send(global.university)
     } catch (error) {
         res.send("Server Error")
     }
 };
 
-export const updateEvent = async (req, res, next) => {
-
+export const updateUniversity = async (req, res, next) => {
 
     const id = req.params.id;
-    const updateOps = {};
     const { universityName,
         universityCode,
         admins } = req.body;
 
 
     try {
-        const result = await Event.updateOne({ _id: id }, {
+        const result = await University.updateOne({ _id: id }, {
             $set: {
                 universityName,
                 universityCode,
@@ -46,29 +44,29 @@ export const updateEvent = async (req, res, next) => {
             }
         });
         if (result.matchedCount === 0) {
-            res.status(404).json({ message: 'Document not found' });
+            res.status(404).json({ message: 'University not found' });
         } else {
-            res.status(200).json({ message: 'Document updated successfully' });
+            res.status(200).json({ message: 'University updated successfully' });
         }
     } catch (error) {
-        console.error('Error updating document:', error);
+        console.error('Error updating University:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 };
 
-export const deleteEvent = async (req, res, next) => {
+export const deleteUniversity = async (req, res, next) => {
 
     const id = req.params.id;
     try {
-        const deletedEvent = await Event.findByIdAndDelete(id);
+        const deletedEvent = await University.findByIdAndDelete(id);
 
         if (!deletedEvent) {
-            return res.status(404).json({ message: 'Event not found' });
+            return res.status(404).json({ message: 'University not found' });
         }
 
-        res.status(200).json({ message: 'Event deleted successfully', deletedEvent });
+        res.status(200).json({ message: 'University deleted successfully', deletedEvent });
     } catch (error) {
-        console.error('Error deleting event:', error);
+        console.error('Error removing University:', error);
         res.status(500).json({ message: 'Internal Server Error' });
     }
 

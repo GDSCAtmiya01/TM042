@@ -48,7 +48,7 @@ export const createEvent = async (req, res, next) => {
 
 export const getAllEvent = async (req, res, next) => {
     try {
-        res.send([global.Events])
+        res.send(global.Events)
     } catch (error) {
         res.send("Server Error")
     }

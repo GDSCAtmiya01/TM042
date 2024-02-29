@@ -1,4 +1,5 @@
 import Event from "../models/event.model.js";
+import University from "../models/university.model.js";
 // import atmEvent from '../models/event.model'
 
 export const createEvent = async (req, res, next) => {
@@ -54,12 +55,22 @@ export const getAllEvent = async (req, res, next) => {
     }
 };
 
+export const getFilteredEvent = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const uni = await University.findById(id);
+        res.send([uni, global.Events])
+    } catch (error) {
+        res.send("Server Error")
+    }
+};
+
 export const updateEvent = async (req, res, next) => {
 
 
     const id = req.params.id;
     const updateOps = {};
-    const { title, description, university,startingDate, endingDate, location, totalParticipants, image, resgestrationOpen,
+    const { title, description, university, startingDate, endingDate, location, totalParticipants, image, resgestrationOpen,
         registrationStartDate, registrationEndDate, allowTeams, teams, limitOfMembers, allowSubEvents, subEvents } = req.body;
 
 

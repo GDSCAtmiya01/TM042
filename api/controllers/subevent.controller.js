@@ -1,4 +1,6 @@
 import Competition from "../models/sub_event.model.js";
+import Event from "../models/event.model.js";
+import University from "../models/university.model.js";
 
 export const createCompetition = async (req, res, next) => {
     const {
@@ -53,6 +55,28 @@ export const getAllCompetition = async (req, res, next) => {
     }
 };
 
+export const getFilteredCompetition = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const event = await Event.findById(id);
+        const uniName = event.university;
+        const university = await University.findOne({ universityName: uniName });
+        res.send([university, event, global.Competitions])
+    } catch (error) {
+        res.send("Server Error")
+    }
+};
+
+export const getDetailedCompetition = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const competition = await Competition.findById(id);
+        res.send(competition)
+    } catch (error) {
+        res.send("Server Error")
+    }
+};
+
 export const updateCompetition = async (req, res, next) => {
 
 
@@ -66,7 +90,7 @@ export const updateCompetition = async (req, res, next) => {
         const result = await Competition.updateOne({ _id: id }, {
             $set: {
                 title, description, eventName, universityName, startingDate, endingDate, location, totalParticipants, image, resgestrationOpen,
-                registrationStartDate, registrationEndDate, allowTeams, teams, limitOfMembers, createdBy 
+                registrationStartDate, registrationEndDate, allowTeams, teams, limitOfMembers, createdBy
             }
         });
         if (result.matchedCount === 0) {

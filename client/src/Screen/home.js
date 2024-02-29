@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 export default function Home() {
 
-    const [university, setuniversity] = useState();
+    const [university, setuniversity] = useState([]);
 
     useEffect(() => {
         const fetchUni = async () => {
@@ -12,10 +12,10 @@ export default function Home() {
                     headers: {
                         'Content-Type': 'application/json'
                     }
-                });
-                response = await response.json();
-                console.log(response);
-                setuniversity(response)
+                })
+                let res = await response.json();
+                console.log(res);
+                setuniversity(res)
 
             } catch (error) {
                 console.error('Error fetching universities:', error);
@@ -33,7 +33,7 @@ export default function Home() {
                     university !== null
                     ? university.map(unidata => {
                         return(
-                            <div>{unidata.universityName}</div>
+                            <div key={unidata._id}>{unidata.universityName}</div>
                         )
                     })
                     :<div></div>

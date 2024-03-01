@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
 
-    const [university, setuniversity] = useState();
-    const [loading, setLoading] = useState(true);
+    const [university, setuniversity] = useState([]);
 
     // const fetchUni = async () => {
     //     try {
@@ -33,17 +32,10 @@ export default function Home() {
             });
 
             const data = await response.json();
+            setuniversity(data);
             // console.log(data);
-
-            if (Array.isArray(data)) {
-                setuniversity(data);
-            } else {
-                console.error('Data is not in expected format');
-            }
         } catch (error) {
             console.error('Error fetching data:', error);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -56,18 +48,17 @@ export default function Home() {
         <div>
             <h1>Home</h1>
             <div>
-                {loading ? (
-                    <p>Loading...</p>
-                ) : (
-                    <ul>
-                        {university.map((uni, index) => (
-                            <>
-                            <Link to={"/" + uni._id} key={index}>{uni.universityName}</Link> 
-                            <br/>
-                            </>
-                        ))}
-                    </ul>
-                )}
+                {university != []
+                    ?
+                    university.map((uni, index) => (
+                        <>
+                            <Link to={"/" + uni._id} key={index}>{uni.universityName}</Link>
+                            <br />
+                        </>
+                    )
+                    )
+                    : <div></div>
+                }
             </div>
         </div>
     )

@@ -1,5 +1,7 @@
-import Event from "../models/event.model.js";
+import {Event, Team} from "../models/event.model.js"; 
+// import Team from "../models/event.model.js";
 import University from "../models/university.model.js";
+import User from "../models/user.model.js";
 // import atmEvent from '../models/event.model'
 
 export const createEvent = async (req, res, next) => {
@@ -109,3 +111,36 @@ export const deleteEvent = async (req, res, next) => {
     }
 
 };
+
+export const getEventTeams = async (req, res, next) => {
+    const id = req.params.id; //this is event id
+    try {
+        const event = await Event.findById(id);
+        if (!event) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+        const data = [];
+        let teams = [];
+        for (let i = 0; i < event.teams.length; i++) {
+            const team = await Team.findById(event.teams[i]);
+            teams.push(team);
+        }
+        for (let i = 0; i < teams.length; i++) {
+            let members = [];
+            for (let j = 0; j < teams[i].teamMembers.length; j++) {
+                const user = await User.findById(teams[i].teamMembers[j]);
+                members.push(user.username);
+            }
+            console.log(members);
+            let teamData = {
+                teamName: teams[i].teamName,
+                teamMembers: members || "data not fetched"
+            }
+            data.push(teamData);
+        }
+        res.status(200).json(data);
+    }catch (err) {
+        console.error('Error getting event:', err);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+}

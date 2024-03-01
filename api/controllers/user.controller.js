@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import jwt from "jsonwebtoken";
+import sendEmail from "../utils/sendMail.js";
 
 export const createAdmin = async (req, res, next) => {
     const username = req.body.username;
@@ -16,6 +17,22 @@ export const createAdmin = async (req, res, next) => {
             })
             .status(200)
             .json("User is now an admin!");
+    }catch (err) {
+        next(err);
+    };
+}
+
+export const sendMaill = async (req, res, next) => {
+    const {from, to, subject, text} = req.body;
+    try {
+        const mailOptions = {
+            from, // sender address
+            to, // list of receivers email
+            subject, 
+            text
+        };
+        await sendEmail(mailOptions);
+        res.status(200).json("Email sent successfully!");
     }catch (err) {
         next(err);
     };

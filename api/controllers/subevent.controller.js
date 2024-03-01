@@ -1,5 +1,5 @@
 import Competition from "../models/sub_event.model.js";
-import Event from "../models/event.model.js";
+import {Event} from "../models/event.model.js";
 import University from "../models/university.model.js";
 
 export const createCompetition = async (req, res, next) => {

@@ -72,11 +72,11 @@ const eventTable = new mongoose.Schema(
 
     allowTeams: { type: Boolean, required: false, default: false },
 
-  //   teams: {
-  //     type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team' }],
-  //     default: [],
-  //     required: false
-  // },
+    teams: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Team' }],
+      default: [],
+      required: false
+  },
    // if allowTeams is true then this field is required
     // this field is ref to the team schema
 
@@ -99,4 +99,7 @@ const eventTable = new mongoose.Schema(
 
 const Event = mongoose.model("atm_event", eventTable);
 
-export default Event;
+export {
+  Event,
+  Team, 
+} ;

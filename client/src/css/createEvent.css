@@ -1,0 +1,52 @@
+.bg-img {
+    background: url("../images/form.jpg");
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-img:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(4, 24, 39, 0.7);
+}
+
+.content {
+    position: absolute;
+    z-index: 999;
+    padding: 10px 32px;
+    width: 90%;
+    /* height: 80%; */
+    margin: 45px 45px 45px 45px;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
+}
+
+.field {
+    position: relative;
+    display: flex;
+    background: transparent;
+    border-bottom: 1px solid #fff;
+}
+
+input {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+.lable {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}

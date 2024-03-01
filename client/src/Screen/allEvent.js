@@ -10,9 +10,10 @@ export default function AllEvent() {
 
     const handleInputChange = e => {
         const inputValue = e.target.value;
+        console.log("input=>"+inputValue);
         setQuery(inputValue);
-
-        const filtered = event.filter(i => (i.title.toLowerCase().includes(query.toLowerCase())));
+        console.log(query);
+        const filtered = event.filter(i => (i.title.toLowerCase().includes(inputValue.toLowerCase())));
         setFilteredData(filtered);
     };
 
@@ -42,14 +43,28 @@ export default function AllEvent() {
             </div>
             <div>
                 {
-                    filteredData != []
-                        ? filteredData.map(eventData => {
+                    query == ''
+                        ?
+                        event.map(eventData => {
+
                             return (
                                 <div>{eventData.title}</div>
                             )
+
                         })
-                        : <div></div>
+                        : 
+                        <div>{
+                            filteredData != []
+                                ? filteredData.map(eventData => {
+                                    return (
+                                        <div>{eventData.title}</div>
+                                    )
+                                })
+                                : <div></div>
+                        }</div>
+
                 }
+
             </div>
         </>
     )

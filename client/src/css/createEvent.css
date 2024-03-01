@@ -16,18 +16,39 @@
     background: rgba(4, 24, 39, 0.7);
 }
 
-.content {
+.contente {
     position: absolute;
     z-index: 999;
-    padding: 10px 32px;
+    /* padding: 10px 32px; */
+    padding-left: 10px;
     width: 90%;
     /* height: 80%; */
-    margin: 45px 45px 45px 45px;
+    margin-left: 65px;
+    margin-top: 50px;
     background: rgba(255, 255, 255, 0.06);
     box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
+    --c: #fff;
+    /* the border color */
+    --b: 1px;
+    /* the border thickness*/
+    --g: 5px;
+    /* the gap on hover */
+
+    padding: calc(var(--g) + var(--b));
+    --_g: #0000 25%, var(--c) 0;
+    background:
+        conic-gradient(from 180deg at top var(--b) right var(--b), var(--_g)) var(--_i, 200%) 0 /200% var(--_i, var(--b)) no-repeat,
+        conic-gradient(at bottom var(--b) left var(--b), var(--_g)) 0 var(--_i, 200%)/var(--_i, var(--b)) 200% no-repeat;
+    transition: .3s, background-position .3s .3s;
+    cursor: pointer;
 }
 
-.field {
+.contente:hover {
+    --_i: 100%;
+    transition: .3s, background-size .3s .3s;
+}
+
+.fielde {
     position: relative;
     display: flex;
     background: transparent;
@@ -45,7 +66,7 @@ input {
     color: #fff;
 }
 
-.lable {
+.lablee {
     color: #fff;
     margin-bottom: 10px;
     font-size: 1.1em;

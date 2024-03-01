@@ -7,6 +7,7 @@ import DetailCompetition from './Screen/detailCompetition';
 import About from './Screen/about';
 import AllEvent from './Screen/allEvent';
 import CreateEvent from './Screen/createEvent';
+import CreateCompetition from './Screen/createCompetition';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/:id/:id' element={<Competition />} />
           <Route path='/:id/:id/:id' element={<DetailCompetition />} />
           <Route path='/createEvent' element={<CreateEvent />} />
+          <Route path='/createCompetition' element={<CreateCompetition />} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,0 +1,72 @@
+.bg-img {
+    background: url("../images/form.jpg");
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.bg-img:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(4, 24, 39, 0.7);
+}
+
+.contentc {
+    position: absolute;
+    z-index: 999;
+    padding-left: 10px;
+    width: 90%;
+    /* height: 80%; */
+    margin-left: 70px;
+    margin-top: 45px;
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: -1px 4px 28px 0px rgba(0, 0, 0, 0.75);
+    --c: #fff;
+    /* the border color */
+    --b: 1px;
+    /* the border thickness*/
+    --g: 5px;
+    /* the gap on hover */
+
+    padding: calc(var(--g) + var(--b));
+    --_g: #0000 25%, var(--c) 0;
+    background:
+        conic-gradient(from 180deg at top var(--b) right var(--b), var(--_g)) var(--_i, 200%) 0 /200% var(--_i, var(--b)) no-repeat,
+        conic-gradient(at bottom var(--b) left var(--b), var(--_g)) 0 var(--_i, 200%)/var(--_i, var(--b)) 200% no-repeat;
+    transition: .3s, background-position .3s .3s;
+    cursor: pointer;
+}
+
+.contentc:hover {
+    --_i: 100%;
+    transition: .3s, background-size .3s .3s;
+}
+
+.fieldc {
+    position: relative;
+    display: flex;
+    background: transparent;
+    border-bottom: 1px solid #fff;
+}
+
+input {
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+.lablec {
+    color: #fff;
+    margin-bottom: 7px;
+    font-size: 1.1em;
+}

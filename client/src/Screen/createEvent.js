@@ -52,13 +52,13 @@ export default function CreateEvent() {
         }
     };
 
-    function generateLimitField() {
+    function generateLimitFielde() {
         var checkbox = document.querySelector('.allowTeam');
-        var limitField = document.getElementById('limitOfTeamMember');
+        var limitFielde = document.getElementById('limitOfTeamMember');
         // Check if the checkbox is checked
         if (checkbox.checked) {
-            // If checked, generate the limitOfTeamMember field
-            if (!limitField) {
+            // If checked, generate the limitOfTeamMember fielde
+            if (!limitFielde) {
                 // Create the input element
                 var input = document.createElement('input');
                 input.setAttribute('type', 'text');
@@ -79,9 +79,9 @@ export default function CreateEvent() {
                 container.appendChild(checkbox)
             }
         } else {
-            // If not checked, remove the limitOfTeamMember field if it exists
-            if (limitField) {
-                limitField.parentNode.removeChild(limitField);
+            // If not checked, remove the limitOfTeamMember fielde if it exists
+            if (limitFielde) {
+                limitFielde.parentNode.removeChild(limitFielde);
             }
         }
 
@@ -89,79 +89,81 @@ export default function CreateEvent() {
     return (
         <>
             <div className='bg-img'>
-                <div className='content'>
+                <div className='contente'>
                     <div id='container'>
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <div style={{ width: "45%", marginBottom: "10px" }}>
-                                <div class="lable">Title</div>
-                                <div class="field" style={{ height: "45px" }}>
+                                <div class="lablee">Title</div>
+                                <div class="fielde" style={{ height: "45px" }}>
                                     <input type="text" name='title' value={credentials.title} required placeholder="Event Title" onChange={onchange} />
                                 </div>
                             </div>
                             {/* <div style={{ width: "45%", marginBottom: "10px" }}>
-                                <div class="lable">Location</div>
-                                <div class="field" style={{ height: "45px" }}>
+                                <div class="lablee">Location</div>
+                                <div class="fielde" style={{ height: "45px" }}>
                                     <input type="text" class="pass-key" required placeholder="Location" />
                                 </div>
                             </div> */}
                         </div>
                         <div>
-                            <div class="lable">Description</div>
-                            <div class="field" style={{ width: "100%", height: "70px", marginBottom: "10px" }}>
+                            <div class="lablee">Description</div>
+                            <div class="fielde" style={{ width: "100%", height: "70px", marginBottom: "10px" }}>
                                 <input type="text" name='description' value={credentials.description} required placeholder="Event Description" onChange={onchange} />
                             </div>
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <div style={{ width: "45%", marginBottom: "10px" }}>
-                                <div class="lable">University</div>
-                                <div class="field" style={{ height: "45px" }}>
+                                <div class="lablee">University</div>
+                                <div class="fielde" style={{ height: "45px" }}>
                                     <input type="text" name='university' value={credentials.university} class="pass-key" required placeholder="University Name" onChange={onchange} />
                                 </div>
                             </div>
                             <div style={{ width: "45%", marginBottom: "10px" }}>
-                                <div class="lable">Location</div>
-                                <div class="field" style={{ height: "45px" }}>
+                                <div class="lablee">Location</div>
+                                <div class="fielde" style={{ height: "45px" }}>
                                     <input type="text" name='location' value={credentials.location} class="pass-key" required placeholder="Location" onChange={onchange} />
                                 </div>
                             </div>
                         </div>
                         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
                             <div style={{ width: "20%", marginBottom: "10px" }}>
-                                <div class="lable">Start Date</div>
-                                <div class="field" style={{ height: "45px" }}>
+                                <div class="lablee">Start Date</div>
+                                <div class="fielde" style={{ height: "45px" }}>
                                     <input type="date" name='startingDate' value={credentials.startingDate} class="pass-key" required placeholder="dd-mm-yyyy" onChange={onchange} />
                                 </div>
                             </div>
                             <div style={{ width: "20%", marginBottom: "10px" }}>
-                                <div class="lable">End Date</div>
-                                <div class="field" style={{ height: "45px" }}>
+                                <div class="lablee">End Date</div>
+                                <div class="fielde" style={{ height: "45px" }}>
                                     <input type="date" name='endingDate' value={credentials.endingDate} class="pass-key" required placeholder="dd-mm-yyyy" onChange={onchange} />
                                 </div>
                             </div>
                             <div style={{ width: "20%", marginBottom: "10px" }}>
-                                <div class="lable">Registration Start Date</div>
-                                <div class="field" style={{ height: "45px" }}>
+                                <div class="lablee">Registration Start Date</div>
+                                <div class="fielde" style={{ height: "45px" }}>
                                     <input type="date" name='registrationStartDate' value={credentials.registrationStartDate} class="pass-key" required placeholder="dd-mm-yyyy" onChange={onchange} />
                                 </div>
                             </div>
                             <div style={{ width: "20%", marginBottom: "10px" }}>
-                                <div class="lable">Registration End Date</div>
-                                <div class="field" style={{ height: "45px" }}>
+                                <div class="lablee">Registration End Date</div>
+                                <div class="fielde" style={{ height: "45px" }}>
                                     <input type="date" name='registrationEndDate' value={credentials.registrationEndDate} class="pass-key" required placeholder="dd-mm-yyyy" onChange={onchange} />
                                 </div>
                             </div>
                         </div>
                         <div style={{ marginBottom: "10px", display: "flex" }}>
-                            <div class="lable">Does not Allow SubEvents :</div>
-                            <input type="checkbox" name='allowSubEvent' value={credentials.allowSubEvent} class="allowTeam" checked="false" required style={{ width: "5%", height: "15px" }} onChange={generateLimitField} />
+                            <div class="lablee">Does not Allow SubEvents :</div>
+                            <input type="checkbox" name='allowSubEvent' value={credentials.allowSubEvent} class="allowTeam" checked="false" required style={{ width: "5%", height: "15px" }} onChange={generateLimitFielde} />
                         </div>
-                        <div>
-                            <div class="lable">Image</div>
-                            <div className='field'>
-                                <input type='text' name='image' value={credentials.image} onChange={onchange} placeholder='image url here' />
+                        <div style={{ marginBottom: "20px" }}>
+                            <div class="lablee">Image</div>
+                            <div className='fielde' style={{ height: "40px" }}>
+                                <input type='text' name='image' value={credentials.image} onChange={onchange} placeholder='Image url here' />
                             </div>
                         </div>
-                        <button onClick={handleSubmit}>Save</button>
+                        <div style={{ display: "flex", justifyContent: "center" }}>
+                            <button style={{ padding: "8px 15px", fontSize: "15px", fontWeight: "bold", backgroundColor: "transparent", color: "#fff", letterSpacin: "1px", border: "1px solid #fff" }} onClick={handleSubmit}>Save</button>
+                        </div>
                     </div>
                 </div>
             </div>

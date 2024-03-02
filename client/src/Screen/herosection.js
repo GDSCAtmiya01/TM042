@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/herosection.css';
 import { Link } from 'react-router-dom';
 
-export default function herosection() {
+export default function Herosection() {
     let event_name = 'InstilFest';
     let nav_links_name = ['Home', 'About us', 'Blog', 'Contact us'];
 
@@ -16,7 +16,7 @@ export default function herosection() {
     return (
         <div className='herosection'>
             <div className='hero_nav'>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+                <div style={{ display: 'flex' }}>
                     <img className='hero_logo' src={require('../assets/Polygon_1.png')} />
                     <div className='hero_logo_name' style={{ color: '#bec4d2' }}>{event_name}</div>
                 </div>

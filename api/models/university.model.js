@@ -6,6 +6,8 @@ const university = mongoose.Schema(
 
         universityCode: { type: String, required: true },
 
+        image : { type:String, require:true},
+
         admins: {
             type: [
                 {

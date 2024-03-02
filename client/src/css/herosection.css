@@ -1,11 +1,17 @@
+.herosection {
+    width: 100vw;
+    height: 100vh;
+    background: url('https://in.thebar.com/_next/image?url=https%3A%2F%2Fcampaigns.in.thebar.com%2FPR1670%2Fpublic%2F2023-12%2Fnew-years-cocktails.jpg%3FVersionId%3DpuTeC5P.88VxmqJgk3hZbTYVEE9Q5Hxo&w=3840&q=75');
+    background-size: cover;
+}
+
 .hero_nav {
     position: fixed;
-    background-color: #0c0c0c73;
     display: flex;
     justify-content: space-around;
     align-items: center;
     padding-block: 20px;
-    z-index: 100;
+    z-index: 10;
     width: 93%;
 }
 
@@ -24,7 +30,7 @@
 }
 
 .hero_nav_link_name:hover {
-    box-shadow: 0 0 10px #2e3c3d;
+    box-shadow: 0 0 20px #2e3c3d;
 }
 
 .hero_btn {

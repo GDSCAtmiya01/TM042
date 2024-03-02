@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import '../css/signinImage.css'
 
 export default function Signin() {
     const [username, setUsername] = useState("");
@@ -30,9 +31,9 @@ export default function Signin() {
 
   return (
     <div className="w-screen h-screen">
-      <div className="bg-cyan-100 pb-4 w-screen h-screen">
-        <div className="bg-cyan-100">
-          <div className="bg-cyan-100">
+      <div className="pb-4 w-screen h-screen screen_s">
+        <div className="">
+          <div className="">
             <div className="flex justify-center items-center sm:p-6 p-2">
               <p className="sm:text-2xl text-xl text-cyan-600 first-letter:text-cyan-800 sm:first-letter:text-6xl first-letter:text-4xl uppercase font-bold">
                 Log In{" "}

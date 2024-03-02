@@ -163,3 +163,13 @@ export const createTeam = async (req, res, next) => {
         next(err);
     }
 };
+
+export const getDetailedEvent = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const competition = await Event.findById(id);
+        res.send(competition)
+    } catch (error) {
+        res.send("Server Error")
+    }
+};

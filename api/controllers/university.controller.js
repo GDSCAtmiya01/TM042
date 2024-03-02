@@ -4,11 +4,13 @@ export const createUniversity = async (req, res, next) => {
     const {
         universityName,
         universityCode,
+        image,
         admins
     } = req.body;
     const newUni = new University({
         universityName,
         universityCode,
+        image,
         admins
     });
     try {
@@ -32,7 +34,7 @@ export const updateUniversity = async (req, res, next) => {
     const id = req.params.id;
     const { universityName,
         universityCode,
-        admins } = req.body;
+        admins, image } = req.body;
 
 
     try {
@@ -40,7 +42,8 @@ export const updateUniversity = async (req, res, next) => {
             $set: {
                 universityName,
                 universityCode,
-                admins
+                admins,
+                image
             }
         });
         if (result.matchedCount === 0) {

@@ -110,23 +110,29 @@ export default function CreateEvent() {
       const json = await response.json();
       console.log(json);
 
-      const addButton = document.getElementById("add");
-      const saveButton = document.getElementById("save");
-
-      if (response.status === 200) {
-        if (addButton.style.display === "block") {
-          alert("Event created Successfully");
-          navigate("json._id/createCompetition");
-        } else if (saveButton.style.display === "block") {
-          alert("Event created Successfully");
+            if (response.status === 200) {
+                if (addButton.style.display === "block") {
+                    alert("Event created Successfully");
+                    navigate(`/createEvent/${json}/createCompetition`)
+                }else if (saveButton.style.display === 'block') {
+                    alert("Event created Successfully");
+                }
+                
+            } else {
+                alert("Enter valid credentials")
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+            alert("Login failed. Please try again later.");
         }
-      } else {
-        alert("Enter valid credentials");
-      }
-    } catch (error) {
-      console.error("Error during login:", error);
-      alert("Login failed. Please try again later.");
-    }
+        
+    //   } else {
+    //     alert("Enter valid credentials");
+    //   }
+    // } catch (error) {
+    //   console.error("Error during login:", error);
+    //   alert("Login failed. Please try again later.");
+    // }
   };
 
   function generateLimitFielde() {

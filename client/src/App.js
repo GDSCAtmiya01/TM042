@@ -8,6 +8,7 @@ import About from './Screen/about';
 import AllEvent from './Screen/allEvent';
 import CreateEvent from './Screen/createEvent';
 import CreateCompetition from './Screen/createCompetition';
+import Herosection from './Screen/herosection';
 import Signin from './Screen/signin';
 import Signup from './Screen/signup';
 
@@ -16,6 +17,7 @@ function App() {
     <BrowserRouter>
       <div>
         <Routes>
+          <Route path='/' element={<Herosection/>}/>
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/home' element={<Home />} />
@@ -25,7 +27,7 @@ function App() {
           <Route path='/:id/:id' element={<Competition />} />
           <Route path='/:id/:id/:id' element={<DetailCompetition />} />
           <Route path='/createEvent' element={<CreateEvent />} />
-          <Route path='/:eventId/createCompetition' element={<CreateCompetition />} />
+          <Route path='createEvent/:eventId/createCompetition' element={<CreateCompetition />} />
         </Routes>
       </div>
     </BrowserRouter>

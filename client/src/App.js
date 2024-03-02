@@ -8,6 +8,8 @@ import About from './Screen/about';
 import AllEvent from './Screen/allEvent';
 import CreateEvent from './Screen/createEvent';
 import CreateCompetition from './Screen/createCompetition';
+import Signin from './Screen/signin';
+import Signup from './Screen/signup';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
       <div>
         <Routes>
           <Route path='/' element={<herosection/>}/>
+          <Route path='/signin' element={<Signin />} />
+          <Route path='/signup' element={<Signup />} />
           <Route path='/home' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/allevent' element={<AllEvent />} />

@@ -86,7 +86,7 @@ export const updateEvent = async (req, res, next) => {
         if (result.matchedCount === 0) {
             res.status(404).json({ message: 'Document not found' });
         } else {
-            res.status(200).json({ message: 'Document updated successfully' });
+            res.status(200).json({ message: 'Document updated successfully', id : id });
         }
     } catch (error) {
         console.error('Error updating document:', error);
@@ -158,7 +158,7 @@ export const createTeam = async (req, res, next) => {
         const event = await Event.findById(id);
         event.teams.push(newTeam._id);
         await event.save();
-        res.status(200).json("created new team successfully!");
+        res.status(200).json({"message" : "created new team successfully!", "Teamid" : newTeam._id});
     } catch (err) {
         next(err);
     }

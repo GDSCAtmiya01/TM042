@@ -71,3 +71,13 @@ input {
     margin-bottom: 10px;
     font-size: 1.1em;
 }
+
+.btn {
+    padding: 8px 15px;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: transparent;
+    color: #fff;
+    letter-spacing: 1px;
+    border: 1px solid #fff;
+}

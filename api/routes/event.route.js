@@ -4,7 +4,7 @@ import { verifyAdmin } from '../utils/verifyAdmin.js'
 
 const router = express.Router()
 
-router.post('/create', verifyAdmin, createEvent)
+router.post('/create', createEvent)
 router.get('/get', getAllEvent)
 router.get('/get/:id', getFilteredEvent)
 router.patch('/update/:id',verifyAdmin, updateEvent)

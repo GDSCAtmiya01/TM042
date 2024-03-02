@@ -1,16 +1,53 @@
 import React from 'react'
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import "../css/createCompetition.css"
 
 export default function CreateCompetition() {
 
+  const [event, setEvent] = useState({});
+  const params = useParams();
   const navigate = useNavigate();
-
   const [credentials, setCredentials] = useState({
     title: "", description: "", universityName: "", eventName: "", startingDate: "", endingDate: "", location: "", totalParticipants: 0,
     image: "", registrationOpen: "", registrationStartDate: "", registrationEndDate: "", allowTeams: false, teams: [], limitOfMembers: "", createdBy: ""
   });
+
+  useEffect(() => {
+    const fetchevent = async () => {
+      try {
+        let response = await fetch(`http://localhost:3001/api/event/getone/${params.eventId}`, {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        console.log("params " + params.eventId);
+        let data = await response.json();
+        setEvent({
+          title: data.title,
+          university: data.university || "grrk"
+        })
+        // console.log(data.title)
+        // console.log(data)
+        // console.log(event);
+
+      } catch (error) {
+        console.error('Error fetching universities:', error);
+        console.log(error);
+      }
+    }
+    fetchevent();
+  }, [])
+
+  useEffect(() => {
+    console.log("event:", event);
+  }, [event]);
+
+  // const [credentials, setCredentials] = useState({
+  //   title: "", description: "", universityName: event.university, eventName: event.title, startingDate: "", endingDate: "", location: "", totalParticipants: 0,
+  //   image: "", registrationOpen: "", registrationStartDate: "", registrationEndDate: "", allowTeams: false, teams: [], limitOfMembers: "", createdBy: ""
+  // });
 
   const onchange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
@@ -28,8 +65,8 @@ export default function CreateCompetition() {
         body: JSON.stringify({
           title: credentials.title,
           description: credentials.description,
-          eventName: credentials.eventName,
-          universityName: credentials.universityName,
+          eventName: event.title,
+          universityName: event.university,
           location: credentials.location,
           startingDate: credentials.startingDate,
           endingDate: credentials.endingDate,
@@ -46,7 +83,10 @@ export default function CreateCompetition() {
 
       if (response.status === 200) {
         alert("Competition created Successfully");
-        // navigate('/home')
+        setCredentials({
+          title: "", description: "", universityName: "", eventName: "", startingDate: "", endingDate: "", location: "", totalParticipants: 0,
+          image: "", registrationOpen: "", registrationStartDate: "", registrationEndDate: "", allowTeams: false, teams: [], limitOfMembers: 1, createdBy: ""
+        })
       } else {
         alert("Enter valid credentials")
       }
@@ -56,32 +96,19 @@ export default function CreateCompetition() {
     }
   };
 
+  const handleSubmitsave = async (e) => {
+    handleSubmit(e);
+    navigate('/home')
+  }
+
   function generateLimitFieldc() {
-    var checkbox = document.querySelector('.allowTeam');
-    var limitFieldc = document.getElementById('limitOfTeamMember');
-    // Check if the checkbox is checked
-    if (checkbox.checked) {
-      // If checked, generate the limitOfTeamMember fieldc
-      if (!limitFieldc) {
-        // Create the input element
-        var input = document.createElement('input');
-        input.setAttribute('type', 'text');
-        input.setAttribute('id', 'limitOfTeamMember');
-        input.setAttribute('name', 'limitOfTeamMember');
-        input.setAttribute('placeholder', 'Enter limit of team members');
-
-
-        // Append the input element to the form or any desired container
-        var container = document.getElementById('check'); // Change 'container' to your actual container ID
-        container.appendChild(input);
-      }
+    const allowTeam = document.getElementById('allowTeam');
+    const teamMem = document.getElementById('teamMem')
+    if (allowTeam.checked) {
+      teamMem.style.display = 'flex'
     } else {
-      // If not checked, remove the limitOfTeamMember fieldc if it exists
-      if (limitFieldc) {
-        limitFieldc.parentNode.removeChild(limitFieldc);
-      }
+      teamMem.style.display = 'none'
     }
-
   }
   return (
     <>
@@ -98,7 +125,7 @@ export default function CreateCompetition() {
               <div style={{ width: "45%", marginBottom: "10px" }}>
                 <div class="lablec">Event</div>
                 <div class="fieldc" style={{ height: "40px" }}>
-                  <input type="text" name='eventName' value={credentials.eventName} required placeholder="Belongs to Event" onChange={onchange} />
+                  <input type="text" name='eventName' value={event.title} disabled={true} required placeholder="Belongs to Event" onChange={onchange} />
                 </div>
               </div>
             </div>
@@ -112,7 +139,7 @@ export default function CreateCompetition() {
               <div style={{ width: "45%", marginBottom: "10px" }}>
                 <div class="lablec">University</div>
                 <div class="fieldc" style={{ height: "40px" }}>
-                  <input type="text" name='universityName' value={credentials.universityName} required placeholder="University Name" onChange={onchange} />
+                  <input type="text" name='universityName' value={event.university} disabled={true} required placeholder="University Name" onChange={onchange} />
                 </div>
               </div>
               <div style={{ width: "45%", marginBottom: "10px" }}>
@@ -163,19 +190,25 @@ export default function CreateCompetition() {
               </div>
             </div>
 
-            <div id='check' style={{ marginBottom: "5px", display: "flex" }}>
-              <div class="lablec">Allow Teams</div>
-              <input type="checkbox" name='allowTeams' value={credentials.allowTeams} class="allowTeam" checked="false" required style={{ width: "5%", height: "15px" }} onChange={generateLimitFieldc} />
+            <div style={{ marginBottom: "10px", display: "flex" }}>
+              <div class="lablee">Allow Teams :</div>
+              <input type="checkbox" name='allowSubEvent' value={credentials.allowTeams} id="allowTeam" required style={{ width: "5%", height: "15px" }} onClick={generateLimitFieldc} />
+              <div id='teamMem' style={{ display: "none" }}>
+                <div class="lablee" style={{ marginRight: "10px" }}>Limit Of Team Members :</div>
+                <div className='fieldc'>
+                  <input type='text' name='limitOfMembers' value={credentials.limitOfMembers} placeholder='Team Memebers' onChange={onchange}></input>
+                </div>
+              </div>
             </div>
             <div style={{ marginBottom: "10px" }}>
               <div class="lablec">Image</div>
               <div className='fieldc' style={{ height: "40px" }}>
-                <input type='text' name='image' value={credentials.image} onChange={onchange} placeholder='image url here' />
+                <input type='text' name='image' value={credentials.image} onChange={onchange} placeholder='Image url here' />
               </div>
             </div>
             <div style={{ display: "flex", justifyContent: "center", marginBottom: "5px" }}>
-              <button className='btn' style={{ marginRight: "10px" }} onClick={navigate("/createCompetition")}>Add More</button>
-              <button className='btn' onClick={handleSubmit}>Save</button>
+              <button className='btn' value={'addMore'} style={{ marginRight: "10px" }} onClick={handleSubmit}>Add More</button>
+              <button className='btn' value={'save'} onClick={handleSubmitsave}>Save</button>
             </div>
           </div>
         </div>

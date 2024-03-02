@@ -14,6 +14,7 @@ function App() {
     <BrowserRouter>
       <div>
         <Routes>
+          <Route path='/' element={<herosection/>}/>
           <Route path='/home' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/allevent' element={<AllEvent />} />
@@ -21,7 +22,7 @@ function App() {
           <Route path='/:id/:id' element={<Competition />} />
           <Route path='/:id/:id/:id' element={<DetailCompetition />} />
           <Route path='/createEvent' element={<CreateEvent />} />
-          <Route path='/:eventId/createCompetition' element={<CreateCompetition />} />
+          <Route path='createEvent/:eventId/createCompetition' element={<CreateCompetition />} />
         </Routes>
       </div>
     </BrowserRouter>

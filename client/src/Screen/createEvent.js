@@ -48,7 +48,7 @@ export default function CreateEvent() {
             if (response.status === 200) {
                 if (addButton.style.display === "block") {
                     alert("Event created Successfully");
-                    navigate('json._id/createCompetition')
+                    navigate(`/createEvent/${json}/createCompetition`)
                 }else if (saveButton.style.display === 'block') {
                     alert("Event created Successfully");
                 }

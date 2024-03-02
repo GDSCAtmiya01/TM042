@@ -43,7 +43,7 @@ export const createEvent = async (req, res, next) => {
     });
     try {
         await newEvent.save();
-        res.status(200).json("created new event successfully!");
+        res.status(200).json(newEvent._id);
     } catch (err) {
         next(err);
     }
@@ -144,3 +144,22 @@ export const getEventTeams = async (req, res, next) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 }
+
+export const createTeam = async (req, res, next) => {
+    const { teamName, teamMembers } = req.body;
+    const id = req.params.Eventid
+    const newTeam = new Team({
+        teamName,
+        teamMembers
+    });
+    try {
+        await newTeam.save();
+        console.log(newTeam._id)
+        const event = await Event.findById(id);
+        event.teams.push(newTeam._id);
+        await event.save();
+        res.status(200).json("created new team successfully!");
+    } catch (err) {
+        next(err);
+    }
+};

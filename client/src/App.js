@@ -25,7 +25,7 @@ function App() {
           <Route path='/:id/:id' element={<Competition />} />
           <Route path='/:id/:id/:id' element={<DetailCompetition />} />
           <Route path='/createEvent' element={<CreateEvent />} />
-          <Route path='/createCompetition' element={<CreateCompetition />} />
+          <Route path='/:eventId/createCompetition' element={<CreateCompetition />} />
         </Routes>
       </div>
     </BrowserRouter>

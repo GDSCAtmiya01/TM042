@@ -1,8 +1,11 @@
 import React from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../css/createCompetition.css"
 
 export default function CreateCompetition() {
+
+  const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
     title: "", description: "", universityName: "", eventName: "", startingDate: "", endingDate: "", location: "", totalParticipants: 0,
@@ -171,7 +174,8 @@ export default function CreateCompetition() {
               </div>
             </div>
             <div style={{ display: "flex", justifyContent: "center", marginBottom: "5px" }}>
-              <button style={{ padding: "8px 15px", fontSize: "15px", fontWeight: "bold", backgroundColor: "transparent", color: "#fff", letterSpacin: "1px", border: "1px solid #fff" }} onClick={handleSubmit}>Save</button>
+              <button className='btn' style={{ marginRight: "10px" }} onClick={navigate("/createCompetition")}>Add More</button>
+              <button className='btn' onClick={handleSubmit}>Save</button>
             </div>
           </div>
         </div>

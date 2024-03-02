@@ -1,9 +1,11 @@
 import React from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../css/createEvent.css"
 
 export default function CreateEvent() {
 
+    const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState({
         title: "", description: "", university: "", startingDate: "", endingDate: "", location: "", totalParticipants: "",
@@ -40,9 +42,17 @@ export default function CreateEvent() {
             const json = await response.json();
             console.log(json);
 
+            const addButton = document.getElementById("add");
+            const saveButton = document.getElementById("save");
+
             if (response.status === 200) {
-                alert("Event created Successfully");
-                // navigate('/home')
+                if (addButton.style.display === "block") {
+                    alert("Event created Successfully");
+                    navigate('json._id/createCompetition')
+                }else if (saveButton.style.display === 'block') {
+                    alert("Event created Successfully");
+                }
+                
             } else {
                 alert("Enter valid credentials")
             }
@@ -53,36 +63,15 @@ export default function CreateEvent() {
     };
 
     function generateLimitFielde() {
-        var checkbox = document.querySelector('.allowTeam');
-        var limitFielde = document.getElementById('limitOfTeamMember');
-        // Check if the checkbox is checked
-        if (checkbox.checked) {
-            // If checked, generate the limitOfTeamMember fielde
-            if (!limitFielde) {
-                // Create the input element
-                var input = document.createElement('input');
-                input.setAttribute('type', 'text');
-                input.setAttribute('id', 'limitOfTeamMember');
-                input.setAttribute('name', 'limitOfTeamMember');
-                input.setAttribute('placeholder', 'Enter limit of team members');
-
-                // Create a new checkbox element
-                var checkbox = document.createElement('input');
-                checkbox.setAttribute('type', 'checkbox');
-                checkbox.setAttribute('id', 'myCheckbox');
-                checkbox.setAttribute('name', 'myCheckbox');
-                checkbox.setAttribute('value', 'isChecked');
-
-                // Append the input element to the form or any desired container
-                var container = document.getElementById('container'); // Change 'container' to your actual container ID
-                container.appendChild(input);
-                container.appendChild(checkbox)
-            }
+        const allowSubEvent = document.getElementById("allowSubEvent");
+        const addButton = document.getElementById("add");
+        const saveButton = document.getElementById("save");
+        if (allowSubEvent.checked) {
+            addButton.style.display = 'block';
+            saveButton.style.display = 'none';
         } else {
-            // If not checked, remove the limitOfTeamMember fielde if it exists
-            if (limitFielde) {
-                limitFielde.parentNode.removeChild(limitFielde);
-            }
+            addButton.style.display = 'none';
+            saveButton.style.display = 'block';
         }
 
     }
@@ -152,8 +141,9 @@ export default function CreateEvent() {
                             </div>
                         </div>
                         <div style={{ marginBottom: "10px", display: "flex" }}>
-                            <div class="lablee">Does not Allow SubEvents :</div>
-                            <input type="checkbox" name='allowSubEvent' value={credentials.allowSubEvent} class="allowTeam" checked="false" required style={{ width: "5%", height: "15px" }} onChange={generateLimitFielde} />
+                            <div class="lablee">Allow SubEvents :</div>
+                            <input type="checkbox" name='allowSubEvent' value={credentials.allowSubEvent} id="allowSubEvent" required style={{ width: "5%", height: "15px" }} onClick={generateLimitFielde} />
+                            {/* <input type='checkbox'></input> */}
                         </div>
                         <div style={{ marginBottom: "20px" }}>
                             <div class="lablee">Image</div>
@@ -162,7 +152,8 @@ export default function CreateEvent() {
                             </div>
                         </div>
                         <div style={{ display: "flex", justifyContent: "center" }}>
-                            <button style={{ padding: "8px 15px", fontSize: "15px", fontWeight: "bold", backgroundColor: "transparent", color: "#fff", letterSpacin: "1px", border: "1px solid #fff" }} onClick={handleSubmit}>Save</button>
+                            <button className='btn' id='add' style={{ display: "none", marginRight: "10px" }} onClick={handleSubmit}>Add</button>
+                            <button className='btn' id='save' style={{ display: "block" }} onClick={handleSubmit}>Save</button>
                         </div>
                     </div>
                 </div>

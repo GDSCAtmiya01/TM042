@@ -1,10 +1,11 @@
 import React from 'react';
 import '../css/herosection.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Herosection() {
     let event_name = 'InstilFest';
-    let nav_links_name = ['Home', 'About us', 'Blog', 'Contact us'];
+    let nav_links_name = ['Home', 'About us', 'admin', 'Contact us'];
+    const nav = useNavigate();
 
     let nav_links = nav_links_name.map((e) => {
         return (
@@ -22,8 +23,8 @@ export default function Herosection() {
                 </div>
                 <div className='hero_nav_links'>{nav_links}</div>
                 <div>
-                    <button className='hero_btn'>Admin</button>
-                    <button className='hero_btn'>Sign In</button>
+                    <button onClick={() => nav('/admin')} className='hero_btn'>Admin</button>
+                    <button onClick={() => nav('/signin')} className='hero_btn'>Sign In</button>
                 </div>
             </div>
             <div className='hero_content'>
@@ -38,7 +39,7 @@ export default function Herosection() {
                         <p className='pb-2'>Celebrating Moments, Creating Experiences:</p>
                         <p className='pb-2'>Unforgettable Events Tailored Just for You!</p>
                         <p className='pb-2'>Crafting Unforgettable Events</p></p>
-                    <Link to={'/layout/home'} className='hero_getstarted_btn'>Get Started</Link>
+                    <Link to={'/home'} className='hero_getstarted_btn'>Get Started</Link>
                 </div>
             </div>
         </div>

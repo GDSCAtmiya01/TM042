@@ -11,6 +11,9 @@ import CreateCompetition from './Screen/createCompetition';
 import Herosection from './Screen/herosection';
 import Signin from './Screen/signin';
 import Signup from './Screen/signup';
+import Admin from './Screen/admin';
+import Registration from './Screen/registration';
+import Admin_View from './Screen/Admin_View';
 
 function App() {
   return (
@@ -20,14 +23,17 @@ function App() {
           <Route path='/' element={<Herosection/>}/>
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='/admin' element={<Admin />} />
           <Route path='/home' element={<Home />} />
-          <Route path='/about' element={<About />} />
+          <Route path='/About us' element={<About />} />
           <Route path='/allevent' element={<AllEvent />} />
-          <Route path='/:id' element={<Event />} />
-          <Route path='/:id/:id' element={<Competition />} />
-          <Route path='/:id/:id/:id' element={<DetailCompetition />} />
-          <Route path='/createEvent' element={<CreateEvent />} />
-          <Route path='createEvent/:eventId/createCompetition' element={<CreateCompetition />} />
+          <Route path='/:uniId' element={<Event />} />
+          <Route path='/:uniId/:eventId' element={<Competition />} />
+          <Route path='/:uniId/:eventId/:compId' element={<DetailCompetition />} />
+          <Route path='/:uniId/createEvent' element={<CreateEvent />} />
+          <Route path='/:uniId/createEvent/:eventId/createCompetition' element={<CreateCompetition />} />
+          <Route path='/:uniId/:eventId/:compId/register' element={<Registration />} />
+          <Route path='/adminView' element={<Admin_View />} />
         </Routes>
       </div>
     </BrowserRouter>

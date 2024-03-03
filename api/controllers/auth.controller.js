@@ -46,7 +46,7 @@ export const signin = async (req, res, next) => {
         httpOnly: true,
       })
       .status(200)
-      .json(rest);
+      .json({username, password});
   } catch (err) {
     next(err);
   }

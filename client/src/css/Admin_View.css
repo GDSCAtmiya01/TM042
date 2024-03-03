@@ -1,0 +1,44 @@
+.event_list {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 30px;
+    color: #b1b6c9;
+    font-weight: 700;
+}
+
+.participant_list {
+    display: none;
+    height: 100%;
+}
+
+.competetion_list {
+    width: 600px;
+}
+
+.fa-chevron-down {
+    font-size: 20px;
+    transition: all 1s ease-in-out;
+}
+
+.fa-chevron-down_hover {
+    transform: rotate(180deg);
+}
+
+.competetion_list_hover {
+    display: block;
+    transition: all 0.4s ease-in-out;
+    animation: competetion_animation 2s;
+}
+
+@keyframes competetion_animation {
+    0% {
+        height: 0px;
+        opacity: 0;
+    }
+
+    100% {
+        height: 240px;
+        opacity: 1;
+    }
+}

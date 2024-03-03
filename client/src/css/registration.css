@@ -1,0 +1,26 @@
+.resgtration_main {
+    background-image: url('../assets/concert.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 695px;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+}
+
+.registration {
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    margin-top: 115px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #b1b6c9ad;
+    border-radius: 20px;
+}

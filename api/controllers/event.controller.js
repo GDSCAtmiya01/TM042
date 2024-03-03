@@ -1,4 +1,5 @@
 import {Event, Team} from "../models/event.model.js"; 
+import Competition from "../models/sub_event.model.js";
 // import Team from "../models/event.model.js";
 import University from "../models/university.model.js";
 import User from "../models/user.model.js";
@@ -147,7 +148,7 @@ export const getEventTeams = async (req, res, next) => {
 
 export const createTeam = async (req, res, next) => {
     const { teamName, teamMembers } = req.body;
-    const id = req.params.Eventid
+    const id = req.params.compId
     const newTeam = new Team({
         teamName,
         teamMembers
@@ -155,7 +156,7 @@ export const createTeam = async (req, res, next) => {
     try {
         await newTeam.save();
         console.log(newTeam._id)
-        const event = await Event.findById(id);
+        const event = await Competition.findById(id);
         event.teams.push(newTeam._id);
         await event.save();
         res.status(200).json({"message" : "created new team successfully!", "Teamid" : newTeam._id});

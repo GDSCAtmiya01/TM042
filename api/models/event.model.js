@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const teamSchema = mongoose.Schema(
   {
       teamName: { type: String, required: true },
-      teamMembers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], // this field is ref to the user schema
+      teamMembers: [{ type: String, required: true }], // this field is ref to the user schema
       // this field is ref to the user schema
   }
 )

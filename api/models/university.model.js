@@ -6,7 +6,7 @@ const university = mongoose.Schema(
 
         universityCode: { type: String, required: true },
 
-        image : { type:String, require:true},
+        image : { type:String, require:true, default:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHXi6kWCo1P3qJAuOnEAs6jWS1Dg1BqRkk8Q&usqp=CAU"},
 
         admins: {
             type: [

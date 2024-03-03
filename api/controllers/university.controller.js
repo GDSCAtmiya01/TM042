@@ -2,23 +2,38 @@ import University from "../models/university.model.js";
 
 export const createUniversity = async (req, res, next) => {
     const {
-        universityName,
-        universityCode,
-        image,
-        admins
+        username,
+        universityName
     } = req.body;
-    const newUni = new University({
-        universityName,
-        universityCode,
-        image,
-        admins
-    });
-    try {
-        await newUni.save();
-        res.status(200).json("Added new University successfully!");
-    } catch (err) {
-        next(err);
+
+    const uniExist = await University.findOne({ universityName });
+    const adminCode = generateRandomNumber();
+    console.log(universityName);
+    const uniCode = universityName.toString().split(' ');
+    const universityCode = uniCode[0].indexOf(0) + uniCode[1].indexOf(0);
+    const admins = [{adminName:username,adminCode}];
+
+    if (uniExist) {
+         uniExist.admins.push({adminName:username,adminCode});
+         await uniExist.save();
+         console.log("exist")
+         res.status(200).json(adminCode);
+    }else{
+        const newUni = new University({
+            universityName,
+            universityCode,
+            admins
+        });
+        console.log("created")
+        try {
+            await newUni.save();
+            res.status(200).json(adminCode);
+        } catch (err) {
+            next(err);
+        }
     }
+    
+    
 };
 
 export const getAllUniversity = async (req, res, next) => {
@@ -74,3 +89,39 @@ export const deleteUniversity = async (req, res, next) => {
     }
 
 };
+
+export const checkAdminCode = async (req, res, next) => {
+    const adminCodee = req.body.adminCode
+    const admin = await University.findOne({ admins: { $elemMatch: { adminCode: adminCodee } }});
+    console.log(adminCodee)
+    if(admin){
+        res.status(200).json({"msg" : "Admin code is correct", "universityId":admin._id, "admin":admin})
+    }
+    else{
+        res.status(401).json("Admin code is incorrect")
+    }
+};
+
+function generateRandomNumber () {
+    let arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    let code = '';
+    for (let i = 0; i < 8; i++) {
+        code += arr[Math.floor(Math.random() * arr.length)];
+    }
+    return code
+}
+
+
+export const getOneUniversity = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const university = await University.findById(id);
+        res.send(university)
+    } catch (error) {
+        res.send("Server Error")
+    }
+}
+
+export const getUniversityByUserId = async (req, res, next) => {
+    
+}

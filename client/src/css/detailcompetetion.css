@@ -1,0 +1,75 @@
+.Cometetion_main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.competition_title {
+    font-size: 30px;
+    font-weight: 800;
+    width: 100%;
+    font-family: 'Prosto One';
+    border-bottom: 2px solid #bec4d2ad;
+}
+
+.Event_Name {
+    font-size: 20px;
+}
+
+.Uni_Name {
+    font-size: 20px;
+}
+
+.Content {
+    color: #bec4d2ad;
+    display: flex;
+    transition: all 1s ease-in-out;
+    font-family: 'poppins';
+    animation: competition_content_animation 2s forwards;
+}
+
+.image_contain {
+    width: 500px;
+    height: 500px;
+}
+
+.competition_image {
+    width: 100%;
+    border-radius: 20px;
+    transition: all 1s ease-in-out;
+    animation: competition_image_animation 2s forwards;
+}
+
+.btn_resister {
+    outline: none;
+    outline: none;
+    background-color: #bec4d267;
+}
+
+.btn_resister:hover {
+    background-color: #bec4d28a;
+}
+
+@keyframes competition_content_animation {
+    0% {
+        transform: translateX(-800px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes competition_image_animation {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

@@ -11,6 +11,6 @@ router.get('/get/:id', getFilteredEvent)
 router.patch('/update/:id',verifyAdmin, updateEvent)
 router.delete('/delete/:id',verifyAdmin, deleteEvent)
 router.get('/getTeams/:id', getEventTeams)
-router.post('/:Eventid/createTeam', createTeam)
+router.post('/:eventId/:compId/createTeam', createTeam)
 
 export default router

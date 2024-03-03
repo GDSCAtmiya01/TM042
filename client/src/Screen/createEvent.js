@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../css/createEvent.css";
 import {
   getDownloadURL,
@@ -11,8 +11,30 @@ import {
 import { app } from "../firebase";
 
 export default function CreateEvent() {
+  const params = useParams();
   const navigate = useNavigate();
   const [file, setFile] = useState([]);
+  const getUniName = async () => {
+    try {
+      let response = await fetch(
+        `http://localhost:3001/api/university/getone/${params.uniId}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      response = await response.json();
+      console.log(response);
+      return response.universityName;
+    } catch (error) {
+      console.error("Error fetching universities:", error);
+      console.log(error);
+    }
+  }
+
+
   const [credentials, setCredentials] = useState({
     title: "",
     description: "",
@@ -29,16 +51,29 @@ export default function CreateEvent() {
     limitOfMembers: "",
     allowSubEvent: "",
   });
+
+  
+useEffect(() => {
+  getUniName().then((res) => {
+    setCredentials({
+      ...credentials,
+      university: res,
+    });
+    console.log(credentials.university);
+  });
+}, []);
+
+
   const handleSingleImageSubmit = (e) => {
     if (file && file.size <= 2097152) {
-        storeSingleImage(file)
+      storeSingleImage(file)
         .then((url) => {
           setCredentials({
             ...credentials,
             image: url,
           });
 
-          console.log(credentials)
+          console.log(credentials);
         })
         .catch((err) => {
           console.log(err);
@@ -109,23 +144,24 @@ export default function CreateEvent() {
 
       const json = await response.json();
       console.log(json);
-
-            if (response.status === 200) {
-                if (addButton.style.display === "block") {
-                    alert("Event created Successfully");
-                    navigate(`/createEvent/${json}/createCompetition`)
-                }else if (saveButton.style.display === 'block') {
-                    alert("Event created Successfully");
-                }
-                
-            } else {
-                alert("Enter valid credentials")
-            }
-        } catch (error) {
-            console.error("Error during login:", error);
-            alert("Login failed. Please try again later.");
+      const addButton = document.getElementById("add");
+      const saveButton = document.getElementById("save");
+      if (response.status === 200) {
+        if (addButton.style.display === "block") {
+          alert("Event created Successfully");
+          navigate(`/createEvent/${json}/createCompetition`);
+        } else if (saveButton.style.display === "block") {
+          alert("Event created Successfully");
+          navigate(`/${json}`)
         }
-        
+      } else {
+        alert("Enter valid credentials");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      alert("Login failed. Please try again later.");
+    }
+
     //   } else {
     //     alert("Enter valid credentials");
     //   }
@@ -198,6 +234,7 @@ export default function CreateEvent() {
                     name="university"
                     value={credentials.university}
                     class="pass-key"
+                    disabled={true}
                     required
                     placeholder="University Name"
                     onChange={onchange}
